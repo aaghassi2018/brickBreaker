@@ -1,3 +1,9 @@
 #gameArea {
     border: solid 1px black;
 }
+#title{
+  font-size: 50px;
+  margin-left: 46px;
+  font-family:verdana;
+  color: red;
+}
