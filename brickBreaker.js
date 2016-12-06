@@ -66,10 +66,23 @@ function update() {
     if(ball.y >= canvasGA.height - bar.height-20 && ball.x>bar.x && (ball.x + ball.width) <(bar.x+bar.width)){
       ball.vy *= -1;
     }
+    if(ball.x <= -2 || ball.x+ball.width >= canvasGA.width+2){
+      ball.vx*=-1;
+    }
+    if(ball.y <= -2){
+      ball.vy *=-1;
+    }
+
     move();
     ball.update();
     drawStuff();
 
+    if(ball.y >= canvasGA.height - bar.height - bar.height + 2){
+      gameInSession = false;
+    }
+}
+
+function gameOver(){
 
 }
 
