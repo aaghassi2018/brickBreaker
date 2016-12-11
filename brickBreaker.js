@@ -63,7 +63,7 @@ function update() {
 	if(!gameInSession)
 		return;
 
-    if(ball.y >= canvasGA.height - bar.height-20 && ball.x>bar.x && (ball.x + ball.width) <(bar.x+bar.width)){
+    if(ball.y >= canvasGA.height - bar.height-20 && ball.x+ball.width>bar.x && ball.x <(bar.x+bar.width)){
       ball.vy *= -1;
     }
     if(ball.x <= -2 || ball.x+ball.width >= canvasGA.width+2){
