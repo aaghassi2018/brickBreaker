@@ -7,3 +7,9 @@
   font-family:verdana;
   color: red;
 }
+#gameOver{
+	font-size: 50px;
+	margin-top: 20px;
+	font-family:verdana;
+	color: red;
+}

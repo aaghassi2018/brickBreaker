@@ -8,13 +8,13 @@ var gameInSession = false;
 
 var bar = new Bar();
 var ball = new Ball();
-var brick = new Brick();
+var brick = [new Brick()];
 
 var left = false;
 var right =false;
 
 
-function init(){
+function initEasy(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
@@ -22,6 +22,7 @@ function init(){
   ball.y = canvasGA.height-200;
   ball.vx=0.5;
   ball.vy=0.5;
+
 
   gameInSession=true;
   bar.draw();
@@ -85,7 +86,7 @@ function update() {
 }
 
 function gameOver(){
-  document.getElementById("body").innerHTML = "<p></p>";
+  document.getElementById("body").innerHTML = "<h1 id='gameOver'> Game Over! </h1> <button type='button' onclick = 'location.reload()' style='padding:1em; margin-top:20px;'> Play Again? </button>";
 }
 
 function move() {
@@ -108,7 +109,7 @@ function drawStuff() {
 
 	bar.draw();
   ball.draw();
-  brick.draw();
+  //brick.draw();
 }
 
 
