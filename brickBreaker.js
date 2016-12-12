@@ -8,6 +8,7 @@ var gameInSession = false;
 
 var bar = new Bar();
 var ball = new Ball();
+var brick = new Brick();
 
 var left = false;
 var right =false;
@@ -78,12 +79,13 @@ function update() {
     drawStuff();
 
     if(ball.y >= canvasGA.height - bar.height - bar.height + 2){
+      gameOver();
       gameInSession = false;
     }
 }
 
 function gameOver(){
-
+  document.getElementById("body").innerHTML = "<p></p>";
 }
 
 function move() {
@@ -106,6 +108,7 @@ function drawStuff() {
 
 	bar.draw();
   ball.draw();
+  brick.draw();
 }
 
 
@@ -122,6 +125,19 @@ function Bar() {
   this.draw = function() {
       contextGA.fillStyle = "#FF00FF";
   		contextGA.fillRect(this.x, this.y, this.width, this.height);
+  }
+
+}
+
+function Brick() {
+  this.width = 40;
+  this.height = 20;
+  this.x = 250;
+  this.y = 250;
+
+  this.draw = function() {
+      contextGA.fillStyle = "#FF0000";
+      contextGA.fillRect(this.x, this.y, this.width, this.height);
   }
 
 }
