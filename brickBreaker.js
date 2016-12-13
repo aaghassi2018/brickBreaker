@@ -8,13 +8,22 @@ var gameInSession = false;
 
 var bar = new Bar();
 var ball = new Ball();
-var brick = [new Brick()];
+var bricks = [];
+
+var easyCords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
+var gameMode;
+
+
 
 var left = false;
 var right =false;
 
 
 function initEasy(){
+  gameMode = 'easy';
+  for (var i = 0; i < easyCords.length; i +=2) {
+    bricks.push(new Brick(easyCords[i], easyCords[i+1]));
+  }
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
@@ -27,6 +36,9 @@ function initEasy(){
   gameInSession=true;
   bar.draw();
   ball.draw();
+  bricks.forEach(function(element) {
+    element.draw();
+  })
 }
 
 setInterval( playGame, 1 );
@@ -75,6 +87,16 @@ function update() {
       ball.vy *=-1;
     }
 
+    for(var i = 0; i < easyCords.length; i +=2){
+      for(var j = 1; i < easyCords.length; i +=2){
+        if(ball.x >= easyCords[i] && ball.x + ball.width <= easyCords[i] + 20
+        && ball. y >= easyCords[j] && ball.y<= easyCords[j] +20){
+          window.alert("hit!");
+          //this doesn't work...
+        }
+      }
+    }
+
     move();
     ball.update();
     drawStuff();
@@ -86,7 +108,7 @@ function update() {
 }
 
 function gameOver(){
-  document.getElementById("body").innerHTML = "<h1 id='gameOver'> Game Over! </h1> <button type='button' onclick = 'location.reload()' style='padding:1em; margin-top:20px;'> Play Again? </button>";
+  document.getElementById("body").innerHTML = "<h1 id='gameOver'> Game Over! </h1> <button type='button' onclick = 'location.reload()' style='padding:1em; margin-top:20px; margin-left: 125px; background-color:#FF0000'> Play Again? </button>";
 }
 
 function move() {
@@ -109,7 +131,10 @@ function drawStuff() {
 
 	bar.draw();
   ball.draw();
-  //brick.draw();
+  bricks.forEach(function(element) {
+    element.draw();
+  })
+
 }
 
 
@@ -130,11 +155,11 @@ function Bar() {
 
 }
 
-function Brick() {
+function Brick(x, y) {
   this.width = 40;
   this.height = 20;
-  this.x = 250;
-  this.y = 250;
+  this.x = x;
+  this.y = y;
 
   this.draw = function() {
       contextGA.fillStyle = "#FF0000";
