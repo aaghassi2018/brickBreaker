@@ -17,6 +17,8 @@ var gameMode;
 
 var left = false;
 var right =false;
+var once = 0;
+
 
 
 function initEasy(){
@@ -29,8 +31,8 @@ function initEasy(){
 
   ball.x = 0;
   ball.y = canvasGA.height-200;
-  ball.vx=0.5;
-  ball.vy=0.5;
+  ball.vx=5;
+  ball.vy=5;
 
 
   gameInSession=true;
@@ -41,7 +43,7 @@ function initEasy(){
   })
 }
 
-setInterval( playGame, 1 );
+setInterval( playGame, 33 );
 function playGame() {
 	if(!gameInSession)
 		return;
@@ -50,24 +52,22 @@ function playGame() {
 }
 
 function processKeyboardInput(event) {
-	var key = event.key;
-
-	if(key == 'a'){
+	var key = event.keyCode;
+	if(key == 37 || key == 65){
      left = true;
   }
-	else if(key == 'd'){
+	else if(key == 39 || key == 68 ){
      right = true;
   }
 
 }
 
 function processKeyUp(event) {
-  var key = event.key;
-
-  if(key == 'a'){
+  var key = event.keyCode;
+  if(key == 37 || key == 65){
      left = false;
   }
-  else if(key == 'd'){
+  else if(key == 39 || key == 68){
      right = false;
   }
 }
@@ -88,14 +88,14 @@ function update() {
     }
 
     for(var i = 0; i < easyCords.length; i +=2){
-      for(var j = 1; i < easyCords.length; i +=2){
-        if(ball.x >= easyCords[i] && ball.x + ball.width <= easyCords[i] + 20
-        && ball. y >= easyCords[j] && ball.y<= easyCords[j] +20){
-          window.alert("hit!");
-          //this doesn't work...
+      if(ball.x + ball.width >= easyCords[i] && ball.x <= easyCords[i]+ 40){
+        if(ball.y + ball.height >= easyCords[i+1] && ball.y <= easyCords[i+1] + 20){
+          bro(easyCords[i],easyCords[i+1]);
         }
       }
     }
+    once = 0;
+
 
     move();
     ball.update();
@@ -107,6 +107,19 @@ function update() {
     }
 }
 
+function bro(x,y){
+for(once; once< 1; once++){
+  if(ball.x >= x && ball.x < x+40){
+    ball.vy*= -1;
+
+
+    }
+    else {
+      ball.vx *= -1;
+    }
+  }
+}
+
 function gameOver(){
   document.getElementById("body").innerHTML = "<h1 id='gameOver'> Game Over! </h1> <button type='button' onclick = 'location.reload()' style='padding:1em; margin-top:20px; margin-left: 125px; background-color:#FF0000'> Play Again? </button>";
 }
@@ -114,12 +127,12 @@ function gameOver(){
 function move() {
   if(right) {
     if(bar.x<canvasGA.width - bar.width) {
-      bar.x += 2;
+      bar.x += 8;
     }
   }
   if(left) {
     if(bar.x>0) {
-      bar.x -= 2;
+      bar.x -= 8;
     }
   }
 }
@@ -175,8 +188,8 @@ function Ball() {
 	this.x = 0;
   this.y = canvasGA.height-200;
 
-  this.vx=0.5;
-  this.vy=0.5;
+  this.vx=5;
+  this.vy=5;
 
   this.draw = function() {
     contextGA.fillStyle = "#50FFAB"
