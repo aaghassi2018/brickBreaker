@@ -18,8 +18,13 @@ var gameMode;
 var left = false;
 var right =false;
 var once = 0;
+var d = new Date();
+var s = checkTime(d.getSeconds());
+var beginningTime = s;
 
-
+function checkTime(i) {
+        return (i < 10) ? "0" + i : i;
+    }
 
 function initEasy(){
   gameMode = 'easy';
@@ -48,6 +53,10 @@ function playGame() {
 	if(!gameInSession)
 		return;
 
+  d = new Date();
+  s = checkTime(d.getSeconds());
+  var yo = "Score: " + (s-beginningTime);
+  document.getElementById('score').innerHTML = yo;
   update();
 }
 

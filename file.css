@@ -1,5 +1,21 @@
 #gameArea {
     border: solid 1px black;
+
+}
+#canvasDiv{
+  width:49%;
+  display: inline-block;
+}
+#rightOfGameArea{
+  display: inline-block;
+  width:49%;
+  font-family:verdana;
+  color: red;
+}
+#score{
+  position: absolute;
+  top:100;
+  font-size: 30px;
 }
 #title{
   font-size: 50px;
