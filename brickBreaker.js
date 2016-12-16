@@ -114,7 +114,11 @@ for(once; once< 1; once++){
 
 
     }
-    else {
+    else if (ball.y> y) {
+      ball.vy*=-1;
+    }
+    else
+    {
       ball.vx *= -1;
     }
   }
