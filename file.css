@@ -8,14 +8,19 @@
 }
 #rightOfGameArea{
   display: inline-block;
+  position: absolute;
+  top: 0;
   width:49%;
+  height: 500px;
   font-family:verdana;
   color: red;
+  margin-right: auto;
 }
 #score{
   position: absolute;
   top:100;
   font-size: 30px;
+  margin-left: 20%;
 }
 #title{
   font-size: 50px;
@@ -28,4 +33,17 @@
 	margin-top: 20px;
 	font-family:verdana;
 	color: red;
+}
+#underCanvas{
+  display: block;;
+  width: 100%;
+}
+
+button.theButtons{
+  position: static;
+  margin-left: 70px;
+  display:block;
+  padding:1em;
+  margin-top:20px;
+  background-color:#FF0000;
 }

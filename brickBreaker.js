@@ -10,7 +10,7 @@ var bar = new Bar();
 var ball = new Ball();
 var bricks = [];
 
-var easyCords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
+var level1Cords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
 var gameMode;
 
 
@@ -18,18 +18,13 @@ var gameMode;
 var left = false;
 var right =false;
 var once = 0;
-var d = new Date();
-var s = checkTime(d.getSeconds());
-var beginningTime = s;
 
-function checkTime(i) {
-        return (i < 10) ? "0" + i : i;
-    }
 
-function initEasy(){
-  gameMode = 'easy';
-  for (var i = 0; i < easyCords.length; i +=2) {
-    bricks.push(new Brick(easyCords[i], easyCords[i+1]));
+
+function init1(){
+  gameMode = 'norm';
+  for (var i = 0; i < level1Cords.length; i +=2) {
+    bricks.push(new Brick(level1Cords[i], level1Cords[i+1]));
   }
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
@@ -45,7 +40,7 @@ function initEasy(){
   ball.draw();
   bricks.forEach(function(element) {
     element.draw();
-  })
+  });
 }
 
 setInterval( playGame, 33 );
@@ -53,10 +48,7 @@ function playGame() {
 	if(!gameInSession)
 		return;
 
-  d = new Date();
-  s = checkTime(d.getSeconds());
-  var yo = "Score: " + (s-beginningTime);
-  document.getElementById('score').innerHTML = yo;
+
   update();
 }
 
@@ -96,10 +88,10 @@ function update() {
       ball.vy *=-1;
     }
 
-    for(var i = 0; i < easyCords.length; i +=2){
-      if(ball.x + ball.width >= easyCords[i] && ball.x <= easyCords[i]+ 40){
-        if(ball.y + ball.height >= easyCords[i+1] && ball.y <= easyCords[i+1] + 20){
-          bro(easyCords[i],easyCords[i+1]);
+    for(var i = 0; i < level1Cords.length; i +=2){
+      if(ball.x + ball.width >= level1Cords[i] && ball.x <= level1Cords[i]+ 40){
+        if(ball.y + ball.height >= level1Cords[i+1] && ball.y <= level1Cords[i+1] + 20){
+          bro(level1Cords[i],level1Cords[i+1]);
         }
       }
     }
