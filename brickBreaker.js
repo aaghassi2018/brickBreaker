@@ -12,6 +12,7 @@ var bricks = [];
 
 var level1Cords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
 var level2Cords = [50,100,100,25,25,2,5,55,55,6,55,44,874,758,250,250];
+var level3Cords = [250,250];
 
 var workingCords = [];
 
@@ -29,6 +30,7 @@ function init1(){
   for (var i = 0; i < workingCords.length; i +=2) {
     bricks.push(new Brick(workingCords[i], workingCords[i+1]));
   }
+  document.getElementById("rightOfGameArea").style.visibility = "hidden";
 
 
 
@@ -52,7 +54,7 @@ function init2(){
   for (var i = 0; i < workingCords.length; i +=2) {
     bricks.push(new Brick(workingCords[i], workingCords[i+1]));
   }
-
+  document.getElementById("rightOfGameArea").style.visibility = "hidden";
 
 
   bar.x = 90;
@@ -60,14 +62,37 @@ function init2(){
 
   ball.x = 0;
   ball.y = canvasGA.height-200;
-  ball.vx=5;
-  ball.vy=5;
+  ball.vx=6;
+  ball.vy=6;
 
 
   gameInSession=true;
   bar.draw();
   ball.draw();
 }
+
+function init3(){
+  workingCords = level3Cords;
+  for (var i = 0; i < workingCords.length; i +=2) {
+    bricks.push(new Brick(workingCords[i], workingCords[i+1]));
+  }
+  document.getElementById("rightOfGameArea").style.visibility = "hidden";
+
+
+  bar.x = 90;
+  bar.y = canvasGA.height-bar.height;
+
+  ball.x = 0;
+  ball.y = canvasGA.height-200;
+  ball.vx=6;
+  ball.vy=6;
+
+
+  gameInSession=true;
+  bar.draw();
+  ball.draw();
+}
+
 
 setInterval( playGame, 33 );
 function playGame() {
@@ -103,6 +128,10 @@ function update() {
 
 	if(!gameInSession)
 		return;
+  if(workingCords.length == 2){
+    win();
+
+  }
 
     if(ball.y >= canvasGA.height - bar.height-20 && ball.x+ball.width>bar.x && ball.x <(bar.x+bar.width)){
       ball.vy *= -1;
@@ -130,14 +159,21 @@ function update() {
     ball.update();
     drawStuff();
 
-    if(ball.y >= canvasGA.height - bar.height - bar.height + 2){
+    if(ball.y >= canvasGA.height - bar.height){
       gameOver();
       gameInSession = false;
     }
 }
 
+function win(){
+  gameInSession=false;
+  document.getElementById("body").innerHTML = "<h1 id='gameOver'> You Win! </h1> <button type='button' onclick = 'location.reload()' style='padding:1em; margin-top:20px; margin-left: 200px; background-color:#FF0000'> Play Again? </button>";
+
+}
+
 function bro(x,y){
 for(once; once< 1; once++){
+
   if(ball.x >= x && ball.x < x+40){
     ball.vy*= -1;
 
@@ -221,8 +257,8 @@ function Ball() {
 	this.x = 0;
   this.y = canvasGA.height-200;
 
-  this.vx=5;
-  this.vy=5;
+  this.vx=0;
+  this.vy=0;
 
   this.draw = function() {
     contextGA.fillStyle = "#50FFAB"
