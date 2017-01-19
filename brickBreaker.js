@@ -197,7 +197,48 @@ function update() {
   }
 
     if(ball.y >= canvasGA.height - bar.height-20 && ball.x+ball.width>bar.x && ball.x <(bar.x+bar.width)){
-      ball.vy *= -1;
+      //ball collision with bar
+      if(right==true){
+          if(ball.vx>=0){
+            //window.alert('ball going right, bar going right')
+            ball.vy*=-1;
+            ball.vx+=0.75;
+            ball.vy-=0.75;
+          }
+          else {
+            //window.alert('ball going left, bar going right')
+            ball.vy*=-1;
+            ball.vx-=0.75;
+            ball.vy+=0.75;
+          }
+      }
+      else if(left==true){
+        if(ball.vx<=0){
+          //window.alert('ball going left, bar going left')
+          ball.vy*=-1;
+          ball.vx-=0.75;
+          ball.vy+=0.75;
+        }
+        else {
+          //window.alert('ball going right, bar going left')
+          ball.vy*=-1;
+          ball.vx+=0.75;
+          ball.vy-=0.75;
+        }
+      }
+      else {
+        {
+          ball.vy *=-1;
+        }
+      }
+
+
+    }
+    if(ball.vx>= 7){
+      ball.vx = 7;
+    }
+    if(ball.vy>= 7){
+      ball.vy = 7;
     }
     if(ball.x <= -2 || ball.x+ball.width >= canvasGA.width+2){
       ball.vx*=-1;
@@ -250,7 +291,6 @@ for(once; once< 1; once++){
 
   if(ball.x >= x && ball.x < x+40){
     ball.vy*= -1;
-
     }
     else if (ball.y> y) {
       ball.vy*=-1;
@@ -297,9 +337,7 @@ function drawStuff() {
 }
 
 
-function processUserInput(event) {
 
-}
 
 function Bar() {
 	this.width = 100;
