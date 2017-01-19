@@ -23,7 +23,7 @@
   margin-left: 20%;
 }
 #title{
-  font-size: 50px;
+  font-size: 40px;
   margin-left: 46px;
   font-family:verdana;
   color: red;
@@ -33,9 +33,11 @@
 	margin-top: 20px;
 	font-family:verdana;
 	color: red;
+  position:absolute;
+  top:0;
 }
 #underCanvas{
-  display: block;;
+  display: block;
   width: 100%;
 }
 

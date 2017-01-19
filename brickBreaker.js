@@ -11,8 +11,8 @@ var ball = new Ball();
 var bricks = [];
 
 var level1Cords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
-var level2Cords = [50,100,100,25,25,2,5,55,55,6,55,44,874,758,250,250];
-var level3Cords = [250,250];
+var level2Cords = [50,50,228,369,456,214,352,145,214,454];
+var level3Cords = [350,350,100,100,200,200,300,300];
 
 var workingCords = [];
 
@@ -20,12 +20,70 @@ var workingCords = [];
 var left = false;
 var right =false;
 var once = 0;
+var currL;
 
+var l1;
+var l2;
+var l3;
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+}
+
+function checkProgress(){
+  //0 is incomplete, 1 is complete
+
+  l1 = getCookie("l1");
+
+  l2 = getCookie("l2");
+  l3 = getCookie("l3");
+
+    if (l1 == null) {
+      l1 = 0;
+    }
+    if (l2 == null) {
+      l2 = 0;
+    }
+    if (l3 == null) {
+      l3 = 0;
+
+    }
+
+    if(l1 == 1){
+      document.getElementById("l1B").style.backgroundColor = "#00FF00";
+    }
+    else {
+      document.getElementById("l1B").style.backgroundColor = "#FF0000";
+    }
+    if(l2 == 1){
+      document.getElementById("l2B").style.backgroundColor = "#00FF00";
+    }
+    else {
+      document.getElementById("l2B").style.backgroundColor = "#FF0000";
+    }
+    if(l3 == 1){
+      document.getElementById("l3B").style.backgroundColor = "#00FF00";
+    }
+    else {
+      document.getElementById("l3B").style.backgroundColor = "#FF0000";
+    }
+}
 
 function init1(){
 
   workingCords = level1Cords;
+  currL = 1;
 
   for (var i = 0; i < workingCords.length; i +=2) {
     bricks.push(new Brick(workingCords[i], workingCords[i+1]));
@@ -51,6 +109,7 @@ function init1(){
 
 function init2(){
   workingCords = level2Cords;
+  currL = 2;
   for (var i = 0; i < workingCords.length; i +=2) {
     bricks.push(new Brick(workingCords[i], workingCords[i+1]));
   }
@@ -69,10 +128,12 @@ function init2(){
   gameInSession=true;
   bar.draw();
   ball.draw();
+
 }
 
 function init3(){
   workingCords = level3Cords;
+  currL = 3;
   for (var i = 0; i < workingCords.length; i +=2) {
     bricks.push(new Brick(workingCords[i], workingCords[i+1]));
   }
@@ -88,9 +149,11 @@ function init3(){
   ball.vy=6;
 
 
+
   gameInSession=true;
   bar.draw();
   ball.draw();
+
 }
 
 
@@ -128,7 +191,7 @@ function update() {
 
 	if(!gameInSession)
 		return;
-  if(workingCords.length == 2){
+  if(workingCords.length == 0){
     win();
 
   }
@@ -149,6 +212,7 @@ function update() {
           bro(workingCords[i],workingCords[i+1]);
           workingCords.splice(i,2);
           bricks.splice(i/2,1);
+
         }
       }
     }
@@ -166,9 +230,19 @@ function update() {
 }
 
 function win(){
-  gameInSession=false;
-  document.getElementById("body").innerHTML = "<h1 id='gameOver'> You Win! </h1> <button type='button' onclick = 'location.reload()' style='padding:1em; margin-top:20px; margin-left: 200px; background-color:#FF0000'> Play Again? </button>";
+  if(currL == 1){
+    document.cookie = "l1=1";
+  }
+  if(currL == 2){
+    document.cookie = "l2=1";
+  }
+  if(currL == 3){
+    document.cookie = "l3=1";
 
+  }
+  document.getElementById("youWinDiv").style.visibility='visible';
+  document.getElementById("gameOn").style.visibility='hidden';
+  gameInSession=false;
 }
 
 function bro(x,y){
@@ -189,7 +263,10 @@ for(once; once< 1; once++){
 }
 
 function gameOver(){
-  document.getElementById("body").innerHTML = "<h1 id='gameOver'> Game Over! </h1> <button type='button' onclick = 'location.reload()' style='padding:1em; margin-top:20px; margin-left: 125px; background-color:#FF0000'> Play Again? </button>";
+
+  document.getElementById("gameOverDiv").style.visibility='visible';
+  document.getElementById("gameOn").style.visibility='hidden';
+  gameInSession=false;
 }
 
 function move() {
