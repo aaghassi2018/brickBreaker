@@ -26,6 +26,7 @@ var l1;
 var l2;
 var l3;
 
+//from w3schools.com
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -41,11 +42,18 @@ function getCookie(cname) {
     }
 }
 
+//from w3schools.com
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
 function checkProgress(){
   //0 is incomplete, 1 is complete
 
   l1 = getCookie("l1");
-
   l2 = getCookie("l2");
   l3 = getCookie("l3");
 
@@ -199,32 +207,45 @@ function update() {
     if(ball.y >= canvasGA.height - bar.height-20 && ball.x+ball.width>bar.x && ball.x <(bar.x+bar.width)){
       //ball collision with bar
       if(right==true){
-          if(ball.vx>=0){
-            //window.alert('ball going right, bar going right')
-            ball.vy*=-1;
-            ball.vx+=0.75;
-            ball.vy-=0.75;
-          }
-          else {
-            //window.alert('ball going left, bar going right')
-            ball.vy*=-1;
-            ball.vx-=0.75;
-            ball.vy+=0.75;
-          }
+          // if(ball.vx>=0){
+          //   //window.alert('ball going right, bar going right')
+          //   ball.vy*=-1;
+          //
+          //
+          //   //ball.vx+=1;
+          //   ball.vy-=1;
+          // }
+          // else {
+          //   //window.alert('ball going left, bar going right')
+          //   ball.vy*=-1;
+          //
+          //
+          //   //ball.vx-=1;
+          //   ball.vy+=1;
+          // }
+          ball.vy *=-1;
+          ball.vx+=1;
       }
       else if(left==true){
-        if(ball.vx<=0){
-          //window.alert('ball going left, bar going left')
-          ball.vy*=-1;
-          ball.vx-=0.75;
-          ball.vy+=0.75;
-        }
-        else {
-          //window.alert('ball going right, bar going left')
-          ball.vy*=-1;
-          ball.vx+=0.75;
-          ball.vy-=0.75;
-        }
+        // if(ball.vx<=0){
+        //   //window.alert('ball going left, bar going left')
+        //   ball.vy*=-1;
+        //
+        //
+        //   ball.vx+=2;
+        //   ball.vy+=2;
+        // }
+        // else {
+        //   //window.alert('ball going right, bar going left')
+        //   //window.alert('yo')
+        //   ball.vy*=-1;
+        //
+        //
+        //   ball.vx-=1;
+        //   ball.vy-=1;
+        // }
+        ball.vy *=-1;
+        ball.vy-=1;
       }
       else {
         {
@@ -272,13 +293,16 @@ function update() {
 
 function win(){
   if(currL == 1){
-    document.cookie = "l1=1";
+    //document.cookie = "l1=1";
+    setCookie('l1',1,365);
   }
   if(currL == 2){
-    document.cookie = "l2=1";
+    //document.cookie = "l2=1";
+    setCookie('l2',1,365);
   }
   if(currL == 3){
-    document.cookie = "l3=1";
+    //document.cookie = "l3=1";
+    setCookie('l3',1,365);
 
   }
   document.getElementById("youWinDiv").style.visibility='visible';
@@ -368,6 +392,7 @@ function Brick(x, y) {
 function Ball() {
   this.width = 20;
 	this.height = 20;
+
 
 	this.x = 0;
   this.y = canvasGA.height-200;
