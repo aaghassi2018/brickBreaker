@@ -9,13 +9,16 @@ var gameInSession = false;
 var bar = new Bar();
 var ball = new Ball();
 var bricks = [];
+var darkBricks = [];
 
 var level1Cords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
 var level2Cords = [50,50,228,369,456,214,352,145,214,454];
 var level3Cords = [350,350,100,100,200,200,300,300];
+var level3CordsDark = [98,98];
+
 
 var workingCords = [];
-
+var workingCordsDark = [];
 
 var left = false;
 var right =false;
@@ -141,9 +144,14 @@ function init2(){
 
 function init3(){
   workingCords = level3Cords;
+  workingCordsDark = level3CordsDark;
+
   currL = 3;
   for (var i = 0; i < workingCords.length; i +=2) {
     bricks.push(new Brick(workingCords[i], workingCords[i+1]));
+  }
+  for (var i = 0; i < workingCords.length; i +=2) {
+    darkBricks.push(new darkBrick(workingCordsDark[i], workingCordsDark[i+1]));
   }
   document.getElementById("rightOfGameArea").style.visibility = "hidden";
 
@@ -278,6 +286,16 @@ function update() {
         }
       }
     }
+    for(var i = 0; i < workingCordsDark.length; i +=2){
+      if(ball.x + ball.width >= workingCordsDark[i] && ball.x <= workingCordsDark[i]+ 40){
+        if(ball.y + ball.height >= workingCordsDark[i+1] && ball.y <= workingCordsDark[i+1] + 20){
+          bro(workingCordsDark[i],workingCordsDark[i+1]);
+          workingCordsDark.splice(i,2);
+          darkBricks.splice(i/2,1);
+
+        }
+      }
+    }
     once = 0;
 
 
@@ -358,6 +376,9 @@ function drawStuff() {
   bricks.forEach(function(brick) {
     brick.draw();
   })
+  darkBricks.forEach(function(darkBrick) {
+    darkBrick.draw();
+  })
 }
 
 
@@ -384,6 +405,19 @@ function Brick(x, y) {
 
   this.draw = function() {
       contextGA.fillStyle = "#FF0000";
+      contextGA.fillRect(this.x, this.y, this.width, this.height);
+  }
+
+}
+
+function darkBrick(x, y) {
+  this.width = 45;
+  this.height = 25;
+  this.x = x;
+  this.y = y;
+
+  this.draw = function() {
+      contextGA.fillStyle = "#990000";
       contextGA.fillRect(this.x, this.y, this.width, this.height);
   }
 
