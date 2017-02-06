@@ -49,3 +49,13 @@ button.theButtons{
   margin-top:20px;
   background-color:#FF0000;
 }
+
+button.specialButton{
+  position: absolute;
+  margin-left: 435px;
+  display:block;
+  padding:1em;
+  margin-top:20px;
+  top:45;
+  background-color:#FF0000;
+}
