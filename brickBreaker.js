@@ -14,6 +14,7 @@ var darkBricks = [];
 
 //special mode
 var shortPaddleBricks = [];
+var paddleDissapearBricks = [];
 
 var level1Cords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
 
@@ -21,18 +22,21 @@ var level1Cords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 
 var level2Cords = [50,50,228,369,456,214,352,145,214,454];
 
 
-var level3Cords = [350,350,100,100,200,200,300,300];
-var level3CordsDark = [300,300];
+var level3Cords = [10,0, 50,0, 90,0, 130,0, 170,0, 210,0, 250,0, 290,0, 330,0, 370,0, 410,0, 450,0, 50,150, 70,170, 90,190];
+var level3CordsDark = [45,145, 65,165, 85,185];
 
 //special mode
 var level1SCords = [100,100];
 var level1SCordsShortPaddle = [300,300];
+var level1SPaddleDissapearCords = [250,250];
 
 var workingCords = [];
 var workingCordsDark = [];
 
+
 //special mode
 var workingCordsShortPaddle = [];
+var workingCordsPaddleDissapear = [];
 
 var left = false;
 var right =false;
@@ -45,6 +49,11 @@ var l3;
 
 var l1S;
 
+var playGameTimeout = 33;
+
+var time = 5;
+
+var shouldDrawBar = true;
 
 function getCookie(cname) {
   return localStorage.getItem(cname);
@@ -129,6 +138,8 @@ function init1(){
 
 
   gameInSession=true;
+  playGameTimeout = 33;
+  playGame();
   bar.draw();
   ball.draw();
 
@@ -148,11 +159,13 @@ function init2(){
 
   ball.x = 0;
   ball.y = canvasGA.height-200;
-  ball.vx=6;
-  ball.vy=6;
+  ball.vx=5;
+  ball.vy=5;
 
 
   gameInSession=true;
+  playGameTimeout = 33;
+  playGame();
   bar.draw();
   ball.draw();
 
@@ -177,12 +190,14 @@ function init3(){
 
   ball.x = 0;
   ball.y = canvasGA.height-200;
-  ball.vx=6;
-  ball.vy=6;
+  ball.vx=5;
+  ball.vy=5;
 
 
 
   gameInSession=true;
+  playGameTimeout = 33;
+  playGame();
   bar.draw();
   ball.draw();
 
@@ -191,6 +206,7 @@ function init3(){
 function init1S(){
   workingCords = level1SCords;
   workingCordsShortPaddle = level1SCordsShortPaddle;
+  workingCordsPaddleDissapear = level1SPaddleDissapearCords;
 
   currL = 'l1S';
   for (var i = 0; i < workingCords.length; i +=2) {
@@ -198,6 +214,9 @@ function init1S(){
   }
   for (var i = 0; i < workingCordsShortPaddle.length; i +=2) {
     shortPaddleBricks.push(new shortPaddleBrick(workingCordsShortPaddle[i], workingCordsShortPaddle[i+1]));
+  }
+  for (var i = 0; i < workingCordsPaddleDissapear.length; i +=2) {
+    paddleDissapearBricks.push(new paddleDissapearBrick(workingCordsPaddleDissapear[i], workingCordsPaddleDissapear[i+1]));
   }
 
 
@@ -215,18 +234,23 @@ function init1S(){
 
 
   gameInSession=true;
+  playGameTimeout = 33;
+  playGame();
   bar.draw();
   ball.draw();
 
 }
 
 
-setInterval( playGame, 33 );
-function playGame() {
-  if(!gameInSession)
-  return;
+setTimeout(playGame, playGameTimeout );
 
+function playGame() {
+  if(!gameInSession) {
+    setTimeout(playGame, playGameTimeout);
+    return;
+  }
   update();
+  setTimeout(playGame, playGameTimeout);
 }
 
 function processKeyboardInput(event) {
@@ -236,6 +260,12 @@ function processKeyboardInput(event) {
   }
   else if(key == 39 || key == 68 ){
     right = true;
+  }
+  else if(key == 32){
+    playGameTimeout += 100;
+  }
+  else if (key == 50) {
+    playGameTimeout = 33;
   }
 
 }
@@ -254,7 +284,7 @@ function update() {
 
   if(!gameInSession)
   return;
-  if(workingCords.length == 0){
+  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0){
     win();
 
   }
@@ -277,11 +307,11 @@ function update() {
 
 
   }
-  if(ball.vx>= 7){
-    ball.vx = 7;
+  if(ball.vx>= 3){
+    ball.vx = 3;
   }
-  if(ball.vy>= 7){
-    ball.vy = 7;
+  if(ball.vy>= 3){
+    ball.vy = 3;
   }
   if(ball.x <= -2 || ball.x+ball.width >= canvasGA.width+2){
     ball.vx*=-1;
@@ -292,7 +322,7 @@ function update() {
 
   for(var i = 0; i < workingCords.length; i +=2){
     if(ball.x + ball.width >= workingCords[i] && ball.x <= workingCords[i]+ 40){
-      if(ball.y + ball.height >= workingCords[i+1] && ball.y <= workingCords[i+1] + 20){
+      if(ball.y + ball.height >= workingCords[i+1] && ball.y <= workingCords[i+1] + 22){
         bro(workingCords[i],workingCords[i+1]);
         workingCords.splice(i,2);
         bricks.splice(i/2,1);
@@ -301,8 +331,8 @@ function update() {
     }
   }
   for(var i = 0; i < workingCordsDark.length; i +=2){
-    if(ball.x + ball.width >= workingCordsDark[i] && ball.x <= workingCordsDark[i]+ 45){
-      if(ball.y + ball.height >= workingCordsDark[i+1] && ball.y <= workingCordsDark[i+1] + 25){
+    if(ball.x + ball.width >= workingCordsDark[i] && ball.x <= workingCordsDark[i]+ 55){
+      if(ball.y + ball.height >= workingCordsDark[i+1] && ball.y <= workingCordsDark[i+1] + 40){
         bro(workingCordsDark[i],workingCordsDark[i+1]);
         workingCordsDark.splice(i,2);
         darkBricks.splice(i/2,1);
@@ -311,12 +341,22 @@ function update() {
     }
   }
   for(var i = 0; i < workingCordsShortPaddle.length; i +=2){
-    if(ball.x + ball.width >= workingCordsShortPaddle[i] && ball.x <= workingCordsShortPaddle[i]+ 45){
-      if(ball.y + ball.height >= workingCordsShortPaddle[i+1] && ball.y <= workingCordsShortPaddle[i+1] + 25){
+    if(ball.x + ball.width >= workingCordsShortPaddle[i] && ball.x <= workingCordsShortPaddle[i]+ 40){
+      if(ball.y + ball.height >= workingCordsShortPaddle[i+1] && ball.y <= workingCordsShortPaddle[i+1] + 20){
         bro(workingCordsShortPaddle[i],workingCordsShortPaddle[i+1]);
         workingCordsShortPaddle.splice(i,2);
         shortPaddleBricks.splice(i/2,1);
         bar.width = 50;
+      }
+    }
+  }
+  for(var i = 0; i < workingCordsPaddleDissapear.length; i +=2){
+    if(ball.x + ball.width >= workingCordsPaddleDissapear[i] && ball.x <= workingCordsPaddleDissapear[i]+ 40){
+      if(ball.y + ball.height >= workingCordsPaddleDissapear[i+1] && ball.y <= workingCordsPaddleDissapear[i+1] + 20){
+        bro(workingCordsPaddleDissapear[i],workingCordsPaddleDissapear[i+1]);
+        workingCordsPaddleDissapear.splice(i,2);
+        paddleDissapearBricks.splice(i/2,1);
+        show5Sec();
       }
     }
   }
@@ -355,13 +395,14 @@ function win(){
 function bro(x,y){
   for(once; once< 1; once++){
 
-    if(ball.x <= x || ball.x+ball.width > x+45){
-      console.log('hit the bottom or top');
-      ball.vx*= -1;
+    //if ball.y is between the brick y and the brick y + 20
+    if(ball.y > y && ball.y < y + 18) {
+      ball.vx*=-1;
+
     }
-    else if (ball.y < y || ball.y + ball.height > y + 20) {
-      ball.vy*=-1;
-      console.log('hit the side');
+    else //(ball.x <= x || ball.x+ball.width > x+40){
+      {
+      ball.vy*= -1;
     }
   }
 }
@@ -376,12 +417,12 @@ function gameOver(){
 function move() {
   if(right) {
     if(bar.x<canvasGA.width - bar.width) {
-      bar.x += 8;
+      bar.x += 5.5;
     }
   }
   if(left) {
     if(bar.x>0) {
-      bar.x -= 8;
+      bar.x -= 5.5;
     }
   }
 }
@@ -390,8 +431,9 @@ function drawStuff() {
   contextGA.fillStyle = "#FFFFFF";
   contextGA.fillRect(0, 0, canvasGA.width, canvasGA.height);
 
-
-  bar.draw();
+  if(shouldDrawBar == true){
+    bar.draw();
+  }
   ball.draw();
 
 
@@ -404,8 +446,27 @@ function drawStuff() {
   shortPaddleBricks.forEach(function(shortBrick) {
     shortBrick.draw();
   })
+  paddleDissapearBricks.forEach(function(paddleDissapearBrick) {
+    paddleDissapearBrick.draw();
+  })
 }
 
+function show5Sec(){
+  document.getElementById("rightOfInGame").style.visibility = "visible";
+  document.getElementById("secRemaining").innerHTML = time;
+
+  shouldDrawBar = false;
+
+  var lala = setTimeout(show5Sec, 1000);
+  time--;
+
+  if(time == -2){
+    clearInterval(lala);
+    time = 5;
+    shouldDrawBar = true;
+    document.getElementById("rightOfInGame").style.visibility = "hidden";
+  }
+}
 
 
 
@@ -448,9 +509,22 @@ function shortPaddleBrick(x, y) {
 
 }
 
+function paddleDissapearBrick(x, y) {
+  this.width = 40;
+  this.height = 20;
+  this.x = x;
+  this.y = y;
+
+  this.draw = function() {
+    contextGA.fillStyle = "#000000";
+    contextGA.fillRect(this.x, this.y, this.width, this.height);
+  }
+
+}
+
 function darkBrick(x, y) {
-  this.width = 45;
-  this.height = 25;
+  this.width = 50;
+  this.height = 40;
   this.x = x;
   this.y = y;
 
