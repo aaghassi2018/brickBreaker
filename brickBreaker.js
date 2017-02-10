@@ -387,6 +387,7 @@ function win(){
     setCookie('l1S','1');
   }
   checkProgress()
+  document.getElementById("rightOfInGame").style.visibility = "hidden";
   document.getElementById("youWinDiv").style.visibility='visible';
   document.getElementById("gameOn").style.visibility='hidden';
   gameInSession=false;
@@ -411,6 +412,7 @@ function gameOver(){
 
   document.getElementById("gameOverDiv").style.visibility='visible';
   document.getElementById("gameOn").style.visibility='hidden';
+  document.getElementById("rightOfInGame").style.visibility = "hidden";
   gameInSession=false;
 }
 
@@ -452,6 +454,7 @@ function drawStuff() {
 }
 
 function show5Sec(){
+
   document.getElementById("rightOfInGame").style.visibility = "visible";
   document.getElementById("secRemaining").innerHTML = time;
 
@@ -460,7 +463,8 @@ function show5Sec(){
   var lala = setTimeout(show5Sec, 1000);
   time--;
 
-  if(time == -2){
+
+  if(time == -2 || gameInSession == false){
     clearInterval(lala);
     time = 5;
     shouldDrawBar = true;
