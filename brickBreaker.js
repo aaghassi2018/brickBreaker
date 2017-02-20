@@ -15,6 +15,7 @@ var darkBricks = [];
 //special mode
 var shortPaddleBricks = [];
 var paddleDissapearBricks = [];
+var longPaddleBricks = [];
 
 var level1Cords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
 
@@ -26,9 +27,10 @@ var level3Cords = [10,0, 50,0, 90,0, 130,0, 170,0, 210,0, 250,0, 290,0, 330,0, 3
 var level3CordsDark = [45,145, 65,165, 85,185];
 
 //special mode
-var level1SCords = [100,100];
+var level1SCords = [100,210,50,235,50,275,100,300,150,235,150,275,75,100,175,100,275,100,375,100];
 var level1SCordsShortPaddle = [300,300];
-var level1SPaddleDissapearCords = [250,250];
+var level1SPaddleDissapearCords = [];
+var level1SCordsLongPaddle = [103,253];
 
 var workingCords = [];
 var workingCordsDark = [];
@@ -37,6 +39,7 @@ var workingCordsDark = [];
 //special mode
 var workingCordsShortPaddle = [];
 var workingCordsPaddleDissapear = [];
+var workingCordsLongPaddle = [];
 
 var left = false;
 var right =false;
@@ -207,6 +210,7 @@ function init1S(){
   workingCords = level1SCords;
   workingCordsShortPaddle = level1SCordsShortPaddle;
   workingCordsPaddleDissapear = level1SPaddleDissapearCords;
+  workingCordsLongPaddle = level1SCordsLongPaddle;
 
   currL = 'l1S';
   for (var i = 0; i < workingCords.length; i +=2) {
@@ -217,6 +221,9 @@ function init1S(){
   }
   for (var i = 0; i < workingCordsPaddleDissapear.length; i +=2) {
     paddleDissapearBricks.push(new paddleDissapearBrick(workingCordsPaddleDissapear[i], workingCordsPaddleDissapear[i+1]));
+  }
+  for (var i = 0; i < workingCordsLongPaddle.length; i +=2) {
+    longPaddleBricks.push(new longPaddleBrick(workingCordsLongPaddle[i], workingCordsLongPaddle[i+1]));
   }
 
 
@@ -284,7 +291,7 @@ function update() {
 
   if(!gameInSession)
   return;
-  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0){
+  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0 && workingCordsLongPaddle.length == 0){
     win();
 
   }
@@ -357,6 +364,16 @@ function update() {
         workingCordsPaddleDissapear.splice(i,2);
         paddleDissapearBricks.splice(i/2,1);
         show5Sec();
+      }
+    }
+  }
+  for(var i = 0; i < workingCordsLongPaddle.length; i +=2){
+    if(ball.x + ball.width >= workingCordsLongPaddle[i] && ball.x <= workingCordsLongPaddle[i]+ 40){
+      if(ball.y + ball.height >= workingCordsLongPaddle[i+1] && ball.y <= workingCordsLongPaddle[i+1] + 20){
+        bro(workingCordsLongPaddle[i],workingCordsLongPaddle[i+1]);
+        workingCordsLongPaddle.splice(i,2);
+        longPaddleBricks.splice(i/2,1);
+        bar.width = 200;
       }
     }
   }
@@ -451,6 +468,9 @@ function drawStuff() {
   paddleDissapearBricks.forEach(function(paddleDissapearBrick) {
     paddleDissapearBrick.draw();
   })
+  longPaddleBricks.forEach(function(longBrick) {
+    longBrick.draw();
+  })
 }
 
 function show5Sec(){
@@ -501,6 +521,18 @@ function Brick(x, y) {
 }
 
 function shortPaddleBrick(x, y) {
+  this.width = 40;
+  this.height = 20;
+  this.x = x;
+  this.y = y;
+
+  this.draw = function() {
+    contextGA.fillStyle = "#000000";
+    contextGA.fillRect(this.x, this.y, this.width, this.height);
+  }
+
+}
+function longPaddleBrick(x, y) {
   this.width = 40;
   this.height = 20;
   this.x = x;
