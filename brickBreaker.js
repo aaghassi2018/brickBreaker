@@ -16,6 +16,9 @@ var darkBricks = [];
 var shortPaddleBricks = [];
 var paddleDissapearBricks = [];
 var longPaddleBricks = [];
+var movingBricks = [];
+
+
 
 var level1Cords = [125, 60, 55, 150, 55, 270, 125, 370, 325, 60, 395, 150, 395, 270, 325, 370];
 
@@ -32,6 +35,17 @@ var level1SCordsShortPaddle = [300,300];
 var level1SPaddleDissapearCords = [];
 var level1SCordsLongPaddle = [103,253];
 
+var level2SCords = [75,25,175,25,275,25,375,25,350,250,350,150,350,200,250,250,250,200,250,150];
+var level2SCordsShortPaddle = [];
+var level2SPaddleDissapearCords = [103,253];
+var level2SCordsLongPaddle = [300,200];
+
+var level3SCords = [];
+var level3SCordsShortPaddle = [];
+var level3SPaddleDissapearCords = [];
+var level3SCordsLongPaddle = [];
+var level3SCordsMovingBrick = [352,145];
+
 var workingCords = [];
 var workingCordsDark = [];
 
@@ -40,6 +54,7 @@ var workingCordsDark = [];
 var workingCordsShortPaddle = [];
 var workingCordsPaddleDissapear = [];
 var workingCordsLongPaddle = [];
+var workingCordsMovingBrick = [];
 
 var left = false;
 var right =false;
@@ -51,12 +66,16 @@ var l2;
 var l3;
 
 var l1S;
+var l2S;
+var l3S;
 
 var playGameTimeout = 33;
 
 var time = 5;
 
 var shouldDrawBar = true;
+
+var haveMovedBrick = false;
 
 function getCookie(cname) {
   return localStorage.getItem(cname);
@@ -77,6 +96,8 @@ function checkProgress(){
   l3 = getCookie("l3");
 
   l1S = getCookie("l1S");
+  l2S = getCookie("l2S");
+  l3S = getCookie("l3S");
 
   if (l1 == null) {
     l1 = '0';
@@ -90,6 +111,14 @@ function checkProgress(){
   }
   if (l1S == null) {
     l1S = '0';
+
+  }
+  if (l2S == null) {
+    l2S = '0';
+
+  }
+  if (l3S == null) {
+    l3S = '0';
 
   }
 
@@ -116,6 +145,18 @@ function checkProgress(){
   }
   else {
     document.getElementById("l1SB").style.backgroundColor = "#FF0000";
+  }
+  if(l2S == 1){
+    document.getElementById("l2SB").style.backgroundColor = "#00FF00";
+  }
+  else {
+    document.getElementById("l2SB").style.backgroundColor = "#FF0000";
+  }
+  if(l3S == 1){
+    document.getElementById("l3SB").style.backgroundColor = "#00FF00";
+  }
+  else {
+    document.getElementById("l3SB").style.backgroundColor = "#FF0000";
   }
 }
 
@@ -248,6 +289,94 @@ function init1S(){
 
 }
 
+function init2S(){
+  workingCords = level2SCords;
+  workingCordsShortPaddle = level2SCordsShortPaddle;
+  workingCordsPaddleDissapear = level2SPaddleDissapearCords;
+  workingCordsLongPaddle = level2SCordsLongPaddle;
+
+  currL = 'l2S';
+  for (var i = 0; i < workingCords.length; i +=2) {
+    bricks.push(new Brick(workingCords[i], workingCords[i+1]));
+  }
+  for (var i = 0; i < workingCordsShortPaddle.length; i +=2) {
+    shortPaddleBricks.push(new shortPaddleBrick(workingCordsShortPaddle[i], workingCordsShortPaddle[i+1]));
+  }
+  for (var i = 0; i < workingCordsPaddleDissapear.length; i +=2) {
+    paddleDissapearBricks.push(new paddleDissapearBrick(workingCordsPaddleDissapear[i], workingCordsPaddleDissapear[i+1]));
+  }
+  for (var i = 0; i < workingCordsLongPaddle.length; i +=2) {
+    longPaddleBricks.push(new longPaddleBrick(workingCordsLongPaddle[i], workingCordsLongPaddle[i+1]));
+  }
+
+
+  document.getElementById("rightOfGameArea").style.visibility = "hidden";
+
+
+  bar.x = 90;
+  bar.y = canvasGA.height-bar.height;
+
+  ball.x = 0;
+  ball.y = canvasGA.height-200;
+  ball.vx=6;
+  ball.vy=6;
+
+
+
+  gameInSession=true;
+  playGameTimeout = 33;
+  playGame();
+  bar.draw();
+  ball.draw();
+
+}
+
+function init3S(){
+  workingCords = level3SCords;
+  workingCordsShortPaddle = level3SCordsShortPaddle;
+  workingCordsPaddleDissapear = level3SPaddleDissapearCords;
+  workingCordsLongPaddle = level3SCordsLongPaddle;
+  workingCordsMovingBrick = level3SCordsMovingBrick;
+
+  currL = 'l3S';
+  for (var i = 0; i < workingCords.length; i +=2) {
+    bricks.push(new Brick(workingCords[i], workingCords[i+1]));
+  }
+  for (var i = 0; i < workingCordsShortPaddle.length; i +=2) {
+    shortPaddleBricks.push(new shortPaddleBrick(workingCordsShortPaddle[i], workingCordsShortPaddle[i+1]));
+  }
+  for (var i = 0; i < workingCordsPaddleDissapear.length; i +=2) {
+    paddleDissapearBricks.push(new paddleDissapearBrick(workingCordsPaddleDissapear[i], workingCordsPaddleDissapear[i+1]));
+  }
+  for (var i = 0; i < workingCordsLongPaddle.length; i +=2) {
+    longPaddleBricks.push(new longPaddleBrick(workingCordsLongPaddle[i], workingCordsLongPaddle[i+1]));
+  }
+  for (var i = 0; i < workingCordsMovingBrick.length; i +=2) {
+    movingBricks.push(new movingBrick(workingCordsMovingBrick[i], workingCordsMovingBrick[i+1]));
+  }
+
+
+  document.getElementById("rightOfGameArea").style.visibility = "hidden";
+
+
+  bar.x = 90;
+  bar.y = canvasGA.height-bar.height;
+
+  ball.x = 0;
+  ball.y = canvasGA.height-200;
+  ball.vx=6;
+  ball.vy=6;
+
+
+
+  gameInSession=true;
+  playGameTimeout = 33;
+  playGame();
+  bar.draw();
+  ball.draw();
+
+}
+
 
 setTimeout(playGame, playGameTimeout );
 
@@ -291,7 +420,7 @@ function update() {
 
   if(!gameInSession)
   return;
-  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0 && workingCordsLongPaddle.length == 0){
+  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0 && workingCordsLongPaddle.length == 0 && workingCordsMovingBrick.length == 0){
     win();
 
   }
@@ -377,6 +506,16 @@ function update() {
       }
     }
   }
+  for(var i = 0; i < workingCordsMovingBrick.length; i +=2){
+    if(ball.x + ball.width >= workingCordsMovingBrick[i] && ball.x <= workingCordsMovingBrick[i]+ 40){
+      if(ball.y + ball.height >= workingCordsMovingBrick[i+1] && ball.y <= workingCordsMovingBrick[i+1] + 20){
+        bro(workingCordsMovingBrick[i],workingCordsMovingBrick[i+1]);
+        workingCordsMovingBrick.splice(i,2);
+        movingBricks.splice(i/2,1);
+        moveBrick();
+      }
+    }
+  }
   once = 0;
 
 
@@ -387,6 +526,22 @@ function update() {
   if(ball.y >= canvasGA.height - bar.height){
     gameOver();
     gameInSession = false;
+  }
+}
+
+function moveBrick(){
+  if(haveMovedBrick == true){
+    workingCordsMovingBrick = [];
+    movingBricks = [];
+  }
+  else
+  {
+    workingCordsMovingBrick = [150,150];
+    level3SCordsMovingBrick = [150,150];
+    for (var i = 0; i < workingCordsMovingBrick.length; i +=2) {
+      movingBricks.push(new movingBrick(workingCordsMovingBrick[i], workingCordsMovingBrick[i+1]));
+    }
+    haveMovedBrick = true;
   }
 }
 
@@ -402,6 +557,12 @@ function win(){
   }
   if(currL == 'l1S'){
     setCookie('l1S','1');
+  }
+  if(currL == 'l2S'){
+    setCookie('l2S','1');
+  }
+  if(currL == 'l3S'){
+    setCookie('l3S','1');
   }
   checkProgress()
   document.getElementById("rightOfInGame").style.visibility = "hidden";
@@ -470,6 +631,9 @@ function drawStuff() {
   })
   longPaddleBricks.forEach(function(longBrick) {
     longBrick.draw();
+  })
+  movingBricks.forEach(function(movingBrick) {
+    movingBrick.draw();
   })
 }
 
@@ -546,6 +710,19 @@ function longPaddleBrick(x, y) {
 }
 
 function paddleDissapearBrick(x, y) {
+  this.width = 40;
+  this.height = 20;
+  this.x = x;
+  this.y = y;
+
+  this.draw = function() {
+    contextGA.fillStyle = "#000000";
+    contextGA.fillRect(this.x, this.y, this.width, this.height);
+  }
+
+}
+
+function movingBrick(x, y) {
   this.width = 40;
   this.height = 20;
   this.x = x;
