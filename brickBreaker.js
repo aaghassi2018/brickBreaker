@@ -75,7 +75,7 @@ var time = 5;
 
 var shouldDrawBar = true;
 
-var haveMovedBrick = false;
+var haveMovedBrick1 = false;
 
 function getCookie(cname) {
   return localStorage.getItem(cname);
@@ -510,9 +510,7 @@ function update() {
     if(ball.x + ball.width >= workingCordsMovingBrick[i] && ball.x <= workingCordsMovingBrick[i]+ 40){
       if(ball.y + ball.height >= workingCordsMovingBrick[i+1] && ball.y <= workingCordsMovingBrick[i+1] + 20){
         bro(workingCordsMovingBrick[i],workingCordsMovingBrick[i+1]);
-        workingCordsMovingBrick.splice(i,2);
-        movingBricks.splice(i/2,1);
-        moveBrick();
+        moveBrick(i);
       }
     }
   }
@@ -529,19 +527,34 @@ function update() {
   }
 }
 
-function moveBrick(){
-  if(haveMovedBrick == true){
+function moveBrick(i){
+  if(haveMovedBrick1 == true){
     workingCordsMovingBrick = [];
     movingBricks = [];
   }
   else
   {
-    workingCordsMovingBrick = [150,150];
-    level3SCordsMovingBrick = [150,150];
+
+    var x = workingCordsMovingBrick[i];
+    var y = workingCordsMovingBrick[i+1];
+    var newX = (Math.random(0,1)*400);
+    var newY = (Math.random(0,1)*400);
+
+
+
+    workingCordsMovingBrick.splice(i,2);
+    movingBricks.splice(i/2,1);
+
+    workingCordsMovingBrick[i] = newX;
+    workingCordsMovingBrick[i+1] = newY;
+    level3SCordsMovingBrick[i] = newX;
+    level3SCordsMovingBrick[i+1] = newY;
+
+
     for (var i = 0; i < workingCordsMovingBrick.length; i +=2) {
       movingBricks.push(new movingBrick(workingCordsMovingBrick[i], workingCordsMovingBrick[i+1]));
     }
-    haveMovedBrick = true;
+    haveMovedBrick1 = true;
   }
 }
 
