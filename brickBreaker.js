@@ -30,7 +30,7 @@ var level1CordsMovingBrick1 = [];
 var level1CordsMovingBrick2 = [];
 
 
-var level2Cords = [60,60,228,200,400,214,362,146,214,400];
+var level2Cords = [60,60,228,200,400,214,362,146,214,400, 80,110, 250,90, 200,330, 0,299, 350,350, 20,400, 50,300, 300,22, 450,55, 120,250];
 var level2CordsDark = [];
 var level2CordsShortPaddle = [];
 var level2PaddleDissapearCords = [];
@@ -38,7 +38,7 @@ var level2CordsLongPaddle = [];
 var level2CordsMovingBrick1 = [];
 var level2CordsMovingBrick2 = [];
 
-var level3Cords = [10,0, 60,0, 90,0, 130,0, 170,0, 210,0, 260,0, 290,0, 330,0, 370,0, 410,0, 460,0, 60,160, 96,196, 140,240, 340,240, 260,160, 296];
+var level3Cords = [10,0, 60,0, 90,0, 130,0, 170,0, 210,0, 260,0, 290,0, 330,0, 370,0, 410,0, 460,0, 60,160, 96,196, 140,240, 340,240, 260,160, 296,196];
 var level3CordsDark = [46,146, 90,190, 136,236, 336,236, 290,190, 246,146];
 var level3CordsShortPaddle = [];
 var level3PaddleDissapearCords = [];
@@ -90,21 +90,21 @@ var level2SCordsLongPaddle = [310,200];
 var level2SCordsMovingBrick1 = [];
 var level2SCordsMovingBrick2 = [];
 
-var level3SCords = [];
+var level3SCords = [360,180, 420,69, 69,420, 6,6, 450,450];
 var level3SCordsDark = [];
 var level3SCordsShortPaddle = [];
 var level3SPaddleDissapearCords = [];
 var level3SCordsLongPaddle = [];
-var level3SCordsMovingBrick1 = [362,146];
+var level3SCordsMovingBrick1 = [360,140];
 var level3SCordsMovingBrick2 = [100,100];
 
-var level4SCords = [];
+var level4SCords = [1,450, 43,450, 85,450, 127,450, 169,450, 211,450, 253,450, 295,450, 336,450, 377,450, 418,450, 459,450,    1,250, 43,250, 85,250, 127,250, 169,250, 211,250, 253,250, 295,250, 336,250, 377,250, 418,250, 459,250,     1,200, 43,200, 85,200, 127,200, 169,200, 211,200, 253,200, 295,200, 336,200, 377,200, 418,200, 459,200,    1,0, 43,0, 85,0, 127,0, 169,0, 211,0, 253,0, 295,0, 336,0, 377,0, 418,0, 459,0,      43,430,  127,430,  211,430,  295,430,  377,430,  459,430];
 var level4SCordsDark = [];
-var level4SCordsShortPaddle = [];
-var level4SPaddleDissapearCords = [];
-var level4SCordsLongPaddle = [];
-var level4SCordsMovingBrick1 = [];
-var level4SCordsMovingBrick2 = [];
+var level4SCordsShortPaddle = [120,175, 350,230, 30,400];
+var level4SPaddleDissapearCords = [80,350, 250,280, 322,124];
+var level4SCordsLongPaddle = [400,300, 200,230, 450,280, 120,340];
+var level4SCordsMovingBrick1 = [30,30];
+var level4SCordsMovingBrick2 = [430,140];
 
 var level5SCords = [];
 var level5SCordsDark = [];
