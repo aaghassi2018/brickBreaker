@@ -54,7 +54,7 @@ var level4CordsLongPaddle = [];
 var level4CordsMovingBrick1 = [];
 var level4CordsMovingBrick2 = [];
 
-var level5Cords = [];
+var level5Cords = [80,170,100,170,120,150,140,130,160,110,180,90,200,70,220,90,240,110,260,130,280,150,300,170,320,170,320,190];
 var level5CordsDark = [];
 var level5CordsShortPaddle = [];
 var level5PaddleDissapearCords = [];
