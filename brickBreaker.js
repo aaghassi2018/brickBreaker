@@ -46,7 +46,7 @@ var level3CordsLongPaddle = [];
 var level3CordsMovingBrick1 = [];
 var level3CordsMovingBrick2 = [];
 
-var level4Cords = [];
+var level4Cords = [30,420, 30,399, 30,378, 30,357, 30,336, 30,315, 30,294, 30,273, 30,252, 30,261, 30,240, 30,219, 30,198,    110,420, 110,399, 110,378, 110,357, 110,336, 110,315, 110,294, 110,273, 110,252, 110,261, 110,240, 110,219, 110,198,    190,420, 190,399, 190,378, 190,357, 190,336, 190,315, 190,294, 190,273, 190,252, 190,261, 190,240, 190,219, 190,198,    270,420, 270,399, 270,378, 270,357, 270,336, 270,315, 270,294, 270,273, 270,252, 270,261, 270,240, 270,219, 270,198,    350,420, 350,399, 350,378, 350,357, 350,336, 350,315, 350,294, 350,273, 350,252, 350,231, 350,210, 350,189, 350,168,    430,420, 430,399, 430,378, 430,357, 430,336, 430,315, 430,294, 430,273, 430,252, 430,231, 430,210, 430,189, 430,168,    5,147, 46,147, 87,147, 128,147, 169,147, 210,147, 251,147, 292,147, 333,147, 374,147, 415,147, 456,147,    130,126, 135,105, 145,84, 160,63, 180,42, 205,21, 235,0, 270,0, 300,21, 325,42, 345,63, 360,84, 370,105, 375,126];
 var level4CordsDark = [];
 var level4CordsShortPaddle = [];
 var level4PaddleDissapearCords = [];
@@ -156,7 +156,7 @@ var l6S;
 
 var playGameTimeout = 33;
 
-var time = 6;
+var time = 3;
 
 var shouldDrawBar = true;
 
@@ -976,7 +976,7 @@ function processKeyboardInput(event) {
   else if(key == 32){
     playGameTimeout += 100;
   }
-  else if (key == 60) {
+  else if (key == 50) {
     playGameTimeout = 33;
   }
 
@@ -1302,7 +1302,7 @@ function show6Sec(){
 
   if(time == -2 || gameInSession == false){
     clearInterval(lala);
-    time = 6;
+    time = 3;
     shouldDrawBar = true;
     document.getElementById("rightOfInGame").style.visibility = "hidden";
   }
