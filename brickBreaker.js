@@ -156,7 +156,7 @@ var l6S;
 
 var playGameTimeout = 33;
 
-var time = 6;
+var time = 3;
 
 var shouldDrawBar = true;
 
@@ -976,7 +976,7 @@ function processKeyboardInput(event) {
   else if(key == 32){
     playGameTimeout += 100;
   }
-  else if (key == 60) {
+  else if (key == 50) {
     playGameTimeout = 33;
   }
 
@@ -1302,7 +1302,7 @@ function show6Sec(){
 
   if(time == -2 || gameInSession == false){
     clearInterval(lala);
-    time = 6;
+    time = 3;
     shouldDrawBar = true;
     document.getElementById("rightOfInGame").style.visibility = "hidden";
   }
