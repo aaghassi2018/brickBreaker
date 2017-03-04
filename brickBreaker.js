@@ -965,11 +965,6 @@ function init6S(){
 }
 
 function initM(){
-  workingCords = levelMCords;
-  workingCordsDark = levelMCordsDark;
-  workingCordsShortPaddle = levelMCordsShortPaddle;
-  workingCordsPaddleDissapear = levelMPaddleDissapearCords;
-  workingCordsLongPaddle = levelMCordsLongPaddle;
 
   currL = 'lM';
 
@@ -1011,16 +1006,23 @@ function addCords(){
   previewContectGA.fillStyle = "#FFFFFF";
   previewContectGA.fillRect(0, 0, canvasGA.width, canvasGA.height);
 
-  levelMCords.push(document.getElementById('userNormalX').value);
-  levelMCords.push(document.getElementById('userNormalY').value);
-  levelMCordsDark.push(document.getElementById('userDarkX').value);
-  levelMCordsDark.push(document.getElementById('userDarkY').value);
-  levelMCordsShortPaddle.push(document.getElementById('userShortX').value);
-  levelMCordsShortPaddle.push(document.getElementById('userShortY').value);
-  levelMCordsLongPaddle.push(document.getElementById('userLongX').value);
-  levelMCordsLongPaddle.push(document.getElementById('userLongY').value);
-  levelMPaddleDissapearCords.push(document.getElementById('userDissapearX').value);
-  levelMPaddleDissapearCords.push(document.getElementById('userDissapearY').value);
+  levelMCords.push(parseInt(document.getElementById('userNormalX').value));
+  levelMCords.push(parseInt(document.getElementById('userNormalY').value));
+  levelMCordsDark.push(parseInt(document.getElementById('userDarkX').value));
+  levelMCordsDark.push(parseInt(document.getElementById('userDarkY').value));
+  levelMCordsShortPaddle.push(parseInt(document.getElementById('userShortX').value));
+  levelMCordsShortPaddle.push(parseInt(document.getElementById('userShortY').value));
+  levelMCordsLongPaddle.push(parseInt(document.getElementById('userLongX').value));
+  levelMCordsLongPaddle.push(parseInt(document.getElementById('userLongY').value));
+  levelMPaddleDissapearCords.push(parseInt(document.getElementById('userDissapearX').value));
+  levelMPaddleDissapearCords.push(parseInt(document.getElementById('userDissapearY').value));
+
+  workingCords = levelMCords;
+  workingCordsDark = levelMCordsDark;
+  workingCordsShortPaddle = levelMCordsShortPaddle;
+  workingCordsPaddleDissapear = levelMPaddleDissapearCords;
+  workingCordsLongPaddle = levelMCordsLongPaddle;
+
 
   document.getElementById('userNormalX').value = "";
   document.getElementById('userNormalY').value = "";
@@ -1034,28 +1036,28 @@ function addCords(){
   document.getElementById('userDissapearY').value = "";
 
 
-  for (var i = 0; i < levelMCords.length; i +=2) {
-    var curBrick = new Brick(levelMCords[i], levelMCords[i+1]);
+  for (var i = 0; i < workingCords.length; i +=2) {
+    var curBrick = new Brick(workingCords[i], workingCords[i+1]);
     bricks.push(curBrick);
   }
 
-  for (var i = 0; i < levelMCordsDark.length; i +=2) {
-    var curBrick = new darkBrick(levelMCordsDark[i], levelMCordsDark[i+1]);
+  for (var i = 0; i < workingCordsDark.length; i +=2) {
+    var curBrick = new darkBrick(workingCordsDark[i], workingCordsDark[i+1]);
     darkBricks.push(curBrick);
   }
 
-  for (var i = 0; i < levelMCordsShortPaddle.length; i +=2) {
-    var curBrick = new shortPaddleBrick(levelMCordsShortPaddle[i], levelMCordsShortPaddle[i+1]);
+  for (var i = 0; i < workingCordsShortPaddle.length; i +=2) {
+    var curBrick = new shortPaddleBrick(workingCordsShortPaddle[i], workingCordsShortPaddle[i+1]);
     shortPaddleBricks.push(curBrick);
   }
 
-  for (var i = 0; i < levelMCordsLongPaddle.length; i +=2) {
-    var curBrick = new longPaddleBrick(levelMCordsLongPaddle[i], levelMCordsLongPaddle[i+1]);
+  for (var i = 0; i < workingCordsLongPaddle.length; i +=2) {
+    var curBrick = new longPaddleBrick(workingCordsLongPaddle[i], workingCordsLongPaddle[i+1]);
     longPaddleBricks.push(curBrick);
   }
 
-  for (var i = 0; i < levelMPaddleDissapearCords.length; i +=2) {
-    var curBrick = new paddleDissapearBrick(levelMPaddleDissapearCords[i], levelMPaddleDissapearCords[i+1]);
+  for (var i = 0; i < workingCordsPaddleDissapear.length; i +=2) {
+    var curBrick = new paddleDissapearBrick(workingCordsPaddleDissapear[i], workingCordsPaddleDissapear[i+1]);
     paddleDissapearBricks.push(curBrick);
   }
 
@@ -1162,7 +1164,13 @@ function update() {
       if(ball.y + ball.height >= workingCords[i+1] && ball.y <= workingCords[i+1] + 22){
         bro(workingCords[i],workingCords[i+1]);
         workingCords.splice(i,2);
-        bricks.splice(i/2,1);
+        window.alert(workingCords.length)
+        if(i == 0){
+          bricks.splice(0,1);
+        }
+        else {
+          bricks.splice(i/2,1);
+        }
 
       }
     }
@@ -1172,7 +1180,12 @@ function update() {
       if(ball.y + ball.height >= workingCordsDark[i+1] && ball.y <= workingCordsDark[i+1] + 40){
         bro(workingCordsDark[i],workingCordsDark[i+1]);
         workingCordsDark.splice(i,2);
-        darkBricks.splice(i/2,1);
+        if(i == 0){
+          darkBricks.splice(0,1);
+        }
+        else {
+          darkBricks.splice(i/2,1);
+        }
 
       }
     }
@@ -1182,7 +1195,12 @@ function update() {
       if(ball.y + ball.height >= workingCordsShortPaddle[i+1] && ball.y <= workingCordsShortPaddle[i+1] + 20){
         bro(workingCordsShortPaddle[i],workingCordsShortPaddle[i+1]);
         workingCordsShortPaddle.splice(i,2);
-        shortPaddleBricks.splice(i/2,1);
+        if(i == 0){
+          shortPaddleBricks.splice(0,1);
+        }
+        else {
+          shortPaddleBricks.splice(i/2,1);
+        }
         bar.width = 60;
       }
     }
@@ -1192,7 +1210,12 @@ function update() {
       if(ball.y + ball.height >= workingCordsPaddleDissapear[i+1] && ball.y <= workingCordsPaddleDissapear[i+1] + 20){
         bro(workingCordsPaddleDissapear[i],workingCordsPaddleDissapear[i+1]);
         workingCordsPaddleDissapear.splice(i,2);
-        paddleDissapearBricks.splice(i/2,1);
+        if(i == 0){
+          paddleDissapearBricks.splice(0,1);
+        }
+        else {
+          paddleDissapearBricks.splice(i/2,1);
+        }
         show6Sec();
       }
     }
@@ -1202,7 +1225,12 @@ function update() {
       if(ball.y + ball.height >= workingCordsLongPaddle[i+1] && ball.y <= workingCordsLongPaddle[i+1] + 20){
         bro(workingCordsLongPaddle[i],workingCordsLongPaddle[i+1]);
         workingCordsLongPaddle.splice(i,2);
-        longPaddleBricks.splice(i/2,1);
+        if(i == 0){
+          longPaddleBricks.splice(0,1);
+        }
+        else {
+          longPaddleBricks.splice(i/2,1);
+        }
         bar.width = 200;
       }
     }
@@ -1346,6 +1374,9 @@ function win(){
 }
 
 function bro(x,y){
+  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0 && workingCordsLongPaddle.length == 0 && workingCordsMovingBrick1.length == 0 && workingCordsMovingBrick2.length == 0){
+    win();
+  }
   for(once; once< 1; once++){
 
     //if ball.y is between the brick y and the brick y + 20
