@@ -2,19 +2,21 @@
     border: solid 1px black;
 
 }
+#preview {
+    border: solid 1px black;
+
+}
 #canvasDiv{
   width:49%;
   display: inline-block;
 }
 #rightOfGameArea{
   display: inline-block;
-  position: fixed;
   top: 0;
-  width:49%;
+  width:500px;
   height: 500px;
   font-family:verdana;
   color: red;
-  margin-right: auto;
 }
 #rightOfInGame{
   display: inline-block;
@@ -64,7 +66,7 @@ button.theButtons{
 
 button.specialButton{
   position: absolute;
-  margin-left: 435px;
+  margin-left: 380px;
   display:block;
   padding:1em;
   margin-top:20px;
