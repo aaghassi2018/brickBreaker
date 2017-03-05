@@ -1164,14 +1164,13 @@ function update() {
       if(ball.y + ball.height >= workingCords[i+1] && ball.y <= workingCords[i+1] + 22){
         bro(workingCords[i],workingCords[i+1]);
         workingCords.splice(i,2);
-        window.alert(workingCords.length)
         if(i == 0){
           bricks.splice(0,1);
         }
         else {
           bricks.splice(i/2,1);
         }
-
+        checkForWin();
       }
     }
   }
@@ -1189,6 +1188,7 @@ function update() {
 
       }
     }
+    checkForWin();
   }
   for(var i = 0; i < workingCordsShortPaddle.length; i +=2){
     if(ball.x + ball.width >= workingCordsShortPaddle[i] && ball.x <= workingCordsShortPaddle[i]+ 40){
@@ -1204,6 +1204,7 @@ function update() {
         bar.width = 60;
       }
     }
+    checkForWin();
   }
   for(var i = 0; i < workingCordsPaddleDissapear.length; i +=2){
     if(ball.x + ball.width >= workingCordsPaddleDissapear[i] && ball.x <= workingCordsPaddleDissapear[i]+ 40){
@@ -1219,6 +1220,7 @@ function update() {
         show6Sec();
       }
     }
+    checkForWin();
   }
   for(var i = 0; i < workingCordsLongPaddle.length; i +=2){
     if(ball.x + ball.width >= workingCordsLongPaddle[i] && ball.x <= workingCordsLongPaddle[i]+ 40){
@@ -1234,6 +1236,7 @@ function update() {
         bar.width = 200;
       }
     }
+    checkForWin();
   }
   for(var i = 0; i < workingCordsMovingBrick1.length; i +=2){
     if(ball.x + ball.width >= workingCordsMovingBrick1[i] && ball.x <= workingCordsMovingBrick1[i]+ 40){
@@ -1250,6 +1253,7 @@ function update() {
         moveBrick2(i);
       }
     }
+    checkForWin();
   }
   once = 0;
 
@@ -1374,9 +1378,8 @@ function win(){
 }
 
 function bro(x,y){
-  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0 && workingCordsLongPaddle.length == 0 && workingCordsMovingBrick1.length == 0 && workingCordsMovingBrick2.length == 0){
-    win();
-  }
+
+
   for(once; once< 1; once++){
 
     //if ball.y is between the brick y and the brick y + 20
@@ -1388,6 +1391,20 @@ function bro(x,y){
       {
       ball.vy*= -1;
     }
+  }
+
+}
+
+function checkForWin(){
+  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0 && workingCordsLongPaddle.length == 0 && workingCordsMovingBrick1.length == 0 && workingCordsMovingBrick2.length == 0){
+    win();
+  }
+
+  if(workingCords.length == 0){
+    console.log('should win')
+  }
+  else {
+    console.log(workingCords.length);
   }
 }
 
