@@ -57,7 +57,7 @@ var level4CordsLongPaddle = [];
 var level4CordsMovingBrick1 = [];
 var level4CordsMovingBrick2 = [];
 
-var level5Cords = [80,170,100,170,120,150,140,130,160,110,180,90,200,70,220,90,240,110,260,130,280,150,300,170,320,170,320,190];
+var level5Cords = [200,290,170,310,140,330,120,310,100,290,80,270,60,250,40,230,20,210,40,190,60,190,80,170,100,170,120,150,140,130,160,110,180,90,200,70,220,90,240,110,260,130,280,150,300,170,320,170,340,190,360,190,380,210,360,230,340,250,320,270,300,290,280,310,260,330,230,310];
 var level5CordsDark = [];
 var level5CordsShortPaddle = [];
 var level5PaddleDissapearCords = [];
@@ -1023,19 +1023,6 @@ function addCords(){
   workingCordsPaddleDissapear = levelMPaddleDissapearCords;
   workingCordsLongPaddle = levelMCordsLongPaddle;
 
-
-  document.getElementById('userNormalX').value = "";
-  document.getElementById('userNormalY').value = "";
-  document.getElementById('userDarkX').value = "";
-  document.getElementById('userDarkY').value = "";
-  document.getElementById('userShortX').value = "";
-  document.getElementById('userShortY').value = "";
-  document.getElementById('userLongX').value = "";
-  document.getElementById('userLongY').value = "";
-  document.getElementById('userDissapearX').value = "";
-  document.getElementById('userDissapearY').value = "";
-
-
   for (var i = 0; i < workingCords.length; i +=2) {
     var curBrick = new Brick(workingCords[i], workingCords[i+1]);
     bricks.push(curBrick);
@@ -1060,6 +1047,18 @@ function addCords(){
     var curBrick = new paddleDissapearBrick(workingCordsPaddleDissapear[i], workingCordsPaddleDissapear[i+1]);
     paddleDissapearBricks.push(curBrick);
   }
+
+  document.getElementById('userNormalX').value = "";
+  document.getElementById('userNormalY').value = "";
+  document.getElementById('userDarkX').value = "";
+  document.getElementById('userDarkY').value = "";
+  document.getElementById('userShortX').value = "";
+  document.getElementById('userShortY').value = "";
+  document.getElementById('userLongX').value = "";
+  document.getElementById('userLongY').value = "";
+  document.getElementById('userDissapearX').value = "";
+  document.getElementById('userDissapearY').value = "";
+
 
   bricks.forEach(function(Brick) {
     Brick.prevDraw();
@@ -1400,11 +1399,11 @@ function checkForWin(){
     win();
   }
 
+
+
+
   if(workingCords.length == 0){
-    console.log('should win')
-  }
-  else {
-    console.log(workingCords.length);
+    window.alert('should win')
   }
 }
 
