@@ -1006,22 +1006,38 @@ function addCords(){
   previewContectGA.fillStyle = "#FFFFFF";
   previewContectGA.fillRect(0, 0, canvasGA.width, canvasGA.height);
 
-  levelMCords.push(parseInt(document.getElementById('userNormalX').value));
-  levelMCords.push(parseInt(document.getElementById('userNormalY').value));
+  if (document.getElementById("userNormalX").value != "" && document.getElementById("userNormalY") != "") {
+    levelMCords.push(parseInt(document.getElementById('userNormalX').value));
+    levelMCords.push(parseInt(document.getElementById('userNormalY').value));
+  }
+  if (document.getElementById("userDarkX").value != "" && document.getElementById("userDarkY") != "") {
   levelMCordsDark.push(parseInt(document.getElementById('userDarkX').value));
   levelMCordsDark.push(parseInt(document.getElementById('userDarkY').value));
+}
+if (document.getElementById("userShortX").value != "" && document.getElementById("userShortY") != "") {
   levelMCordsShortPaddle.push(parseInt(document.getElementById('userShortX').value));
   levelMCordsShortPaddle.push(parseInt(document.getElementById('userShortY').value));
+}
+if (document.getElementById("userLongX").value != "" && document.getElementById("userLongY") != "") {
   levelMCordsLongPaddle.push(parseInt(document.getElementById('userLongX').value));
   levelMCordsLongPaddle.push(parseInt(document.getElementById('userLongY').value));
+}
+if (document.getElementById("userDissapearX").value != "" && document.getElementById("userDissapearY") != "") {
   levelMPaddleDissapearCords.push(parseInt(document.getElementById('userDissapearX').value));
   levelMPaddleDissapearCords.push(parseInt(document.getElementById('userDissapearY').value));
+}
 
   workingCords = levelMCords;
   workingCordsDark = levelMCordsDark;
   workingCordsShortPaddle = levelMCordsShortPaddle;
   workingCordsPaddleDissapear = levelMPaddleDissapearCords;
   workingCordsLongPaddle = levelMCordsLongPaddle;
+
+  bricks = [];
+  darkBricks = [];
+  shortPaddleBricks = [];
+  longPaddleBricks = [];
+  paddleDissapearBricks = [];
 
   for (var i = 0; i < workingCords.length; i +=2) {
     var curBrick = new Brick(workingCords[i], workingCords[i+1]);
@@ -1400,11 +1416,6 @@ function checkForWin(){
   }
 
 
-
-
-  if(workingCords.length == 0){
-    window.alert('should win')
-  }
 }
 
 function gameOver(){
