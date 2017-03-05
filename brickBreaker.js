@@ -93,7 +93,7 @@ var level2SCordsLongPaddle = [310,200];
 var level2SCordsMovingBrick1 = [];
 var level2SCordsMovingBrick2 = [];
 
-var level3SCords = [360,180, 420,69, 69,420, 6,6, 450,450];
+var level3SCords = [360,220, 420,69, 69,420, 6,6, 450,450];
 var level3SCordsDark = [];
 var level3SCordsShortPaddle = [];
 var level3SPaddleDissapearCords = [];
