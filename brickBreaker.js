@@ -965,8 +965,11 @@ function init6S(){
 }
 
 function initM(){
-
   currL = 'lM';
+  if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0 && workingCordsLongPaddle.length == 0 && workingCordsMovingBrick1.length == 0 && workingCordsMovingBrick2.length == 0){
+    window.alert('You must enter coordinantes for at least 1 brick');
+    return;
+  }
 
 
   document.getElementById("rightOfGameArea").style.visibility = "hidden";
@@ -988,6 +991,7 @@ function initM(){
 
   gameInSession=true;
   playGameTimeout = 33;
+
   playGame();
   bar.draw();
   ball.draw();
@@ -1003,6 +1007,56 @@ function showOptions(){
 }
 
 function addCords(){
+  if(isNaN(document.getElementById("userNormalX").value) || document.getElementById("userNormalX").value < 0 || document.getElementById("userNormalX").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+  if(isNaN(document.getElementById("userNormalY").value) || document.getElementById("userNormalY").value < 0 || document.getElementById("userNormalY").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+
+  if(isNaN(document.getElementById("userDarkX").value) || document.getElementById("userDarkX").value < 0 || document.getElementById("userDarkX").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+
+  if(isNaN(document.getElementById("userDarkY").value) || document.getElementById("userDarkY").value < 0 || document.getElementById("userDarkY").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+  if(isNaN(document.getElementById("userShortX").value) || document.getElementById("userShortX").value < 0 || document.getElementById("userShortX").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+  if(isNaN(document.getElementById("userShortY").value) || document.getElementById("userShortY").value < 0 || document.getElementById("userShortY").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+  if(isNaN(document.getElementById("userLongX").value) || document.getElementById("userLongX").value < 0 || document.getElementById("userLongX").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+  if(isNaN(document.getElementById("userLongY").value) || document.getElementById("userLongY").value < 0 || document.getElementById("userLongY").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+  if(isNaN(document.getElementById("userDarkX").value) || document.getElementById("userDarkX").value < 0 || document.getElementById("userDarkX").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+
+  if(isNaN(document.getElementById("userDissapearX").value) || document.getElementById("userDissapearX").value < 0 || document.getElementById("userDissapearX").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+
+  if(isNaN(document.getElementById("userDissapearY").value) || document.getElementById("userDissapearY").value < 0 || document.getElementById("userDissapearY").value > 400){
+    window.alert('Coordinantes must be a number between 0 and 400...')
+    return;
+  }
+
+
   previewContectGA.fillStyle = "#FFFFFF";
   previewContectGA.fillRect(0, 0, canvasGA.width, canvasGA.height);
 
@@ -1032,6 +1086,7 @@ if (document.getElementById("userDissapearX").value != "" && document.getElement
   workingCordsShortPaddle = levelMCordsShortPaddle;
   workingCordsPaddleDissapear = levelMPaddleDissapearCords;
   workingCordsLongPaddle = levelMCordsLongPaddle;
+
 
   bricks = [];
   darkBricks = [];
