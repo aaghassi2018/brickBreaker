@@ -33,7 +33,7 @@ var level1CordsMovingBrick1 = [];
 var level1CordsMovingBrick2 = [];
 
 
-var level2Cords = [60,60,228,200,400,214,362,146,214,400, 80,110, 250,90, 200,330, 0,299, 350,350, 20,400, 50,300, 300,22, 450,55, 120,250];
+var level2Cords = [60,60,228,200,400,214,362,146,214,400, 80,110, 250,90, 200,330, 350,350, 20,400, 50,300, 300,22, 450,55, 120,250];
 var level2CordsDark = [];
 var level2CordsShortPaddle = [];
 var level2PaddleDissapearCords = [];
@@ -371,7 +371,7 @@ function init1(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -421,7 +421,7 @@ function init2(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -472,7 +472,7 @@ function init3(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -523,7 +523,7 @@ function init4(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -575,7 +575,7 @@ function init5(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -627,7 +627,7 @@ function init6(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -680,7 +680,7 @@ function init1S(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -734,7 +734,7 @@ function init2S(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -788,7 +788,7 @@ function init3S(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -842,7 +842,7 @@ function init4S(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -968,7 +968,6 @@ function init6S(){
 function initM(){
   currL = 'lM';
   if(workingCords.length == 0 && workingCordsDark.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsShortPaddle.length == 0 && workingCordsPaddleDissapear.length == 0 && workingCordsLongPaddle.length == 0 && workingCordsMovingBrick1.length == 0 && workingCordsMovingBrick2.length == 0){
-    window.alert('You must enter coordinantes for at least 1 brick');
     return;
   }
 
@@ -1223,7 +1222,7 @@ function update() {
   if(ball.vy>= 3){
     ball.vy = 3;
   }
-  if(ball.x <= -2 || ball.x+ball.width >= canvasGA.width+2){
+  if(ball.x <= 0 || ball.x+ball.width >= canvasGA.width+2){
     ball.vx*=-1;
   }
   if(ball.y <= -2){
@@ -1450,17 +1449,22 @@ function win(){
 
 function bro(x,y){
 
+  console.log(x + ", " + y)
+  console.log("Ball: " + ball.x + ", " + ball.y)
+
 
   for(once; once< 1; once++){
 
     //if ball.y is between the brick y and the brick y + 20
-    if(ball.y > y && ball.y < y + 18) {
+    if(ball.y > y - 19 + ball.vy && ball.y < y + 19 + ball.vy) {
       ball.vx*=-1;
+      ball.x += ball.vx;
 
     }
     else //(ball.x <= x || ball.x+ball.width > x+40){
       {
       ball.vy*= -1;
+      ball.y += ball.vy;
     }
   }
 
