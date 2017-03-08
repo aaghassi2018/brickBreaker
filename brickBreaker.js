@@ -982,7 +982,7 @@ function initM(){
   bar.x = 90;
   bar.y = canvasGA.height-bar.height;
 
-  ball.x = 0;
+  ball.x = 5;
   ball.y = canvasGA.height-200;
   ball.vx=6;
   ball.vy=6;
@@ -1008,51 +1008,51 @@ function showOptions(){
 
 function addCords(){
   if(isNaN(document.getElementById("userNormalX").value) || document.getElementById("userNormalX").value < 0 || document.getElementById("userNormalX").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
   if(isNaN(document.getElementById("userNormalY").value) || document.getElementById("userNormalY").value < 0 || document.getElementById("userNormalY").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
 
   if(isNaN(document.getElementById("userDarkX").value) || document.getElementById("userDarkX").value < 0 || document.getElementById("userDarkX").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
 
   if(isNaN(document.getElementById("userDarkY").value) || document.getElementById("userDarkY").value < 0 || document.getElementById("userDarkY").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
   if(isNaN(document.getElementById("userShortX").value) || document.getElementById("userShortX").value < 0 || document.getElementById("userShortX").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
   if(isNaN(document.getElementById("userShortY").value) || document.getElementById("userShortY").value < 0 || document.getElementById("userShortY").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
   if(isNaN(document.getElementById("userLongX").value) || document.getElementById("userLongX").value < 0 || document.getElementById("userLongX").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
   if(isNaN(document.getElementById("userLongY").value) || document.getElementById("userLongY").value < 0 || document.getElementById("userLongY").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
   if(isNaN(document.getElementById("userDarkX").value) || document.getElementById("userDarkX").value < 0 || document.getElementById("userDarkX").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
 
   if(isNaN(document.getElementById("userDissapearX").value) || document.getElementById("userDissapearX").value < 0 || document.getElementById("userDissapearX").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
 
   if(isNaN(document.getElementById("userDissapearY").value) || document.getElementById("userDissapearY").value < 0 || document.getElementById("userDissapearY").value > 400){
-    window.alert('Coordinantes must be a number between 0 and 400...')
+    window.alert('Coordinantes must be a number between 1 and 400...')
     return;
   }
 
